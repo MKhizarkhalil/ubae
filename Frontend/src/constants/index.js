@@ -195,3 +195,5 @@ export const LANGUAGE_TO_FLAG = {
   turkish: "tr",
   dutch: "nl",
 };
+
+export const API_BASE_URL = "https://invigorating-sparkle-production.up.railway.app/api"

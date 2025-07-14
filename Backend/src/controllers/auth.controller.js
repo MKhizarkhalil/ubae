@@ -66,7 +66,9 @@ export async function signup(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
+      domain: undefined,
+      path: "/"
     });
 
     // Respond
@@ -105,7 +107,9 @@ export async function login(req, res) {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
+      domain: undefined,
+      path: "/",
     });
     // Respond
     res.status(200).json({
@@ -119,7 +123,12 @@ export async function login(req, res) {
 }
 
 export function logout(req, res) {
-  res.clearCookie("jwt");
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+    path: "/",
+  });
   res.status(200).json({ sucess: true, message: "succesful logout " });
 }
 export async function onboard(req, res) {
